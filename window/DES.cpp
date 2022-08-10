@@ -49,7 +49,7 @@ using CryptoPP::Base64Decoder;
 using CryptoPP::Base64Encoder;
 
 /* import lib des */
-#include "cryptopp/des.h";
+#include "cryptopp/des.h"
 using CryptoPP::DES;
 
 // prototype function
