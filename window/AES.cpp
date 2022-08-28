@@ -27,6 +27,8 @@ using std::codecvt_utf8;
 // external header library
 /* cryptp library */
 #include <cryptopp/cryptlib.h>
+using CryptoPP::Exception;
+
 /* string  Transformation*/
 #include "cryptopp/filters.h"
 using CryptoPP::Redirector;
@@ -49,8 +51,16 @@ using CryptoPP::Base64Decoder;
 using CryptoPP::Base64Encoder;
 
 /* import lib des */
-#include "cryptopp/des.h"
-using CryptoPP::DES;
+#include "cryptopp/aes.h"
+using CryptoPP::AES;
+
+#include "cryptopp/ccm.h"
+using CryptoPP::CBC_Mode;
+
+#include "cryptopp/osrng.h"
+using CryptoPP::AutoSeededRandomPool;
+
+#include "assert.h"
 
 // prototype function
 /* convert string to wstring */
@@ -68,6 +78,21 @@ int main(int argc, char *argv[])
   _setmode(_fileno(stdout), _O_U16TEXT);
 #else
 #endif
+
+  AutoSeededRandomPool prng;
+  CryptoPP::byte key[AES::DEFAULT_KEYLENGTH];
+  prng.GenerateBlock(key, sizeof(key));
+
+  CryptoPP::byte iv[AES::BLOCKSIZE];
+  prng.GenerateBlock(iv, sizeof(iv));
+
+  string plainText = "CBC Mode Test";
+  string cipherText, encoded, recovered;
+
+  encoded.clear();
+
+  // StringSource(key, sizeof(key), true, new HexEncoder(new StringSink(encoded)));
+  cout << "iv: " << iv << endl;
 }
 
 /* convert string to wstring */

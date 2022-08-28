@@ -27,6 +27,8 @@ using std::codecvt_utf8;
 // external header library
 /* cryptp library */
 #include <cryptopp/cryptlib.h>
+using CryptoPP::Exception;
+
 /* string  Transformation*/
 #include "cryptopp/filters.h"
 using CryptoPP::Redirector;
@@ -49,8 +51,16 @@ using CryptoPP::Base64Decoder;
 using CryptoPP::Base64Encoder;
 
 /* import lib des */
-#include "cryptopp/des.h"
-using CryptoPP::DES;
+#include "cryptopp/aes.h"
+using CryptoPP::AES;
+
+#include "cryptopp/ccm.h"
+using CryptoPP::CBC_Mode;
+
+#include "cryptopp/osrng.h"
+using CryptoPP::AutoSeededRandomPool;
+
+#include "assert.h"
 
 // prototype function
 /* convert string to wstring */
@@ -68,6 +78,40 @@ int main(int argc, char *argv[])
   _setmode(_fileno(stdout), _O_U16TEXT);
 #else
 #endif
+
+  wstring wsplain;
+  wcout << "Enter your plain text: ";
+  //  wcin.ignore();
+  getline(wcin, wsplain);
+  string plaintext = ws2s(wsplain);
+
+  wcout << "Your plain text: " << s2ws(plaintext);
+
+  wstring wsmode;
+  wcout << "Enter your mode:" << endl;
+  wcout << "ECB --> Enter 1" << endl;
+  wcout << "CBC --> Enter 2" << endl;
+  wcout << "CFB --> Enter 3" << endl;
+  wcin.ignore();
+  getline(wcin, wsmode);
+  string mode = ws2s(wsmode);
+  switch (std::stoi(mode))
+  {
+  case 1:
+    wcout << "Mode ECB";
+    break;
+  case 2:
+    wcout << "Mode CBC";
+    break;
+  case 3:
+    wcout << "Mode CFB";
+    break;
+  default:
+    wcout << "Mode Unknow";
+    break;
+  }
+
+  return 0;
 }
 
 /* convert string to wstring */
