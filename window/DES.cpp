@@ -68,6 +68,8 @@ int main(int argc, char *argv[])
   _setmode(_fileno(stdout), _O_U16TEXT);
 #else
 #endif
+
+  // cin >> pause;
 }
 
 /* convert string to wstring */

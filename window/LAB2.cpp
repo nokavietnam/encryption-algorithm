@@ -76,6 +76,12 @@ using CryptoPP::byte;
 
 #include "assert.h"
 
+
+// lib caculator time run
+#include <chrono>
+using std::chrono::high_resolution_clock;
+ 
+
 // prototype function
 /* convert string to wstring */
 wstring s2ws(const std::string &str);
