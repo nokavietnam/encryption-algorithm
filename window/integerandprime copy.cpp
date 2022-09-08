@@ -89,7 +89,10 @@ int main(int argc, char *argv[])
   // key generator
   AutoSeededRandomPool prng;
   RSA::PrivateKey rsaprivateKey;
-  rsaprivateKey.GenerateRandomWithKeySize(prng, 3072);
+  // rsaprivateKey.GenerateRandomWithKeySize(prng, 3072);
+  // rsaprivateKey.GenerateRandomWithKeySize(prng, 2048);
+  rsaprivateKey.GenerateRandomWithKeySize(prng, 15360);
+
   RSA::PublicKey rsapublicKey(rsaprivateKey);
   /* Pretty print system parameters */
   Integer modul = rsaprivateKey.GetModulus(); // modul n
